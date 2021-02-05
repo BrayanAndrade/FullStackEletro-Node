@@ -1,62 +1,65 @@
-import React from 'react';
-import { Form, Button, Row } from 'react-bootstrap';
-
-
+import React, { useState, useEffect } from 'react';
+import Form from '../Components/Form';
 
 export default function Contato() {
-  return (
 
-    <div className="container-fluid">
-      <h1 className="bg-secondary pt-3 pb-3 text-center text-white">Contato</h1>
-      <p className="text-center">Entre em contato com a nossa equipe</p>
+    const [comentarios, setComentarios] = useState([]);
 
+    function getComentario() {
+        async function showComentarios() {
+            const url = "http://localhost:3001/comentarios";
+            const resposta = await fetch(url);
+            const resultado = await resposta.json();
+            setComentarios(resultado);
 
-      <div className="col-lg-6 col-md-6 mx-auto">
-        <Form>
+        }
+        showComentarios();
+    }
 
-          <Form.Group>
-            <Form.Label>Nome:</Form.Label>
-            <Form.Control type="text" id="nome" />
-          </Form.Group>
+    useEffect(() => { getComentario() }, []);
 
-          <Form.Group>
-            <Form.Label>Mensagem:</Form.Label>
-            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" type="text" id="mensagem" />
-          </Form.Group>
+    useEffect(() => { }, [comentarios]);
 
-          <Button variant="primary" type="submit">Enviar</Button>
-        </Form>
-      </div>
+    return (
+        <div className="container-fluid">
+            <h3 className="text-white">Products</h3>
 
-      <div className="lojas text-center mt-5">
+            <h2>Contacts</h2>
+            <hr />
+            <div className="container">
 
-        <div className="container">
-          <div className='row mb-5'>
-            <div className='col mb-5'>
-              <h2 className="text-danger">Email</h2>
-              <h4 className="text-secondary">Fullstackeletro@contato.com</h4>
+                <div className="row container-fluid">
 
+                    <div className="col-6 ">
+                        
+                        <font>contact@fullstackmusic.com</font>
 
+                    </div>
+                    <div className="col-6">
+                        
+                        <font>999-9999</font>
+                    </div>
+
+                </div>
             </div>
-            <div className='col mb-5'>
-              <h2 className="text-success">Whatsapp</h2>
-              <h4 className="text-secondary">+55 21 9999-9999</h4>
 
+            <Form />
 
+            <div className="text-white">
+                <div className="col-sm-9">
+                    {comentarios.map(
+                        row =>  <div className="text-dark" key={row.id}>    
+                                Usuário: {row.nome} 
+                                <br />
+                                Mensagem: {row.msg}  
+                                <br />
+                                Data: {row.data} 
+                                <hr />
+                                </div>     
+                                    )
+                    }
+                </div>
             </div>
-            <div className='col mb-5'>
-              <h2 className="text-primary">Ligue</h2>
-              <h4 className="text-secondary">+55 21 9999-9999</h4>
-
-            </div>
-          </div>
         </div>
-      </div>
-
-    </div>
-
-
-
-  );
-
+    );
 }

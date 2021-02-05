@@ -6,7 +6,7 @@ import Lojas from './Pages/Lojas';
 import Footer from './Components/Footer';
 import Contato from './Pages/Contato';
 import Inicio from './Pages/Inicio';
-import Tabela from './Pages/Tabela'
+import Tabela from './Pages/Tabela';
 
 
 

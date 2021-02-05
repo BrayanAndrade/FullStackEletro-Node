@@ -14,7 +14,7 @@ export default class Tabela extends React.Component{
 }
 
 exibirProdutos(){
-    fetch("http://localhost/fsreact/fullstackeletro/src/api/")
+    fetch("http://localhost:3001/")
     .then((response)=>response.json())
     .then((responseJson)=>
     {
